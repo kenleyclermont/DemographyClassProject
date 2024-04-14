@@ -1,4 +1,4 @@
-﻿using SQLite;
+using SQLite;
 using CommunityToolkit.Mvvm.ComponentModel;
 namespace Demographie.Maui.Models
 {
@@ -22,10 +22,6 @@ namespace Demographie.Maui.Models
         public string phone;
         [ObservableProperty]
         public string photo;
-        public string nomComplet
-        {
-            get { return $"{prenom} {nom}"; }
-        }
         public Personne(int id, string prenom, string nom,  string ddn, string email, string phone)
         {
             this.id = id;
