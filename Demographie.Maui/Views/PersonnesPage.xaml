@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Demographie.Maui.Models"
+             xmlns:vm="clr-namespace:Demographie.Maui.ViewModels"
+             x:DataType="vm:PersonnesPageViewModel"
+             x:Class="Demographie.Maui.Views.PersonnesPage"
+             Title="Personnes">
+    <Grid RowDefinitions="*, auto" RowSpacing="5" Margin="5">
+
+
+        <CollectionView x:Name="Personnes" ItemsSource="{Binding ModelViewPersonnes}"
+                            EmptyView="La liste est vide !" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Personne">
+                    <Border StrokeShape="RoundRectangle 10" Margin="5" Padding="10" HeightRequest="100">
+                        <VerticalStackLayout Padding="5" Spacing="10" VerticalOptions="Center">
+                            <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
+                                <!-- Placeholder Image  -->
+                                <!-- "https://www.flaticon.com/free-icons/focus"  -->
+                                <Image Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" 
+                                       Source="Resources/Images/placeholder_photo.png" HeightRequest="70" 
+                                       WidthRequest="70"/>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Prenom}"></Label>
+                                    <Label Text="{Binding Nom}"></Label>
+                                    <Label Text="{Binding Email}"></Label>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:PersonnesPageViewModel}}, Path=EditPersonneCommand}" CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="1" Margin="10"
+                    x:Name="BtnAddPersonne"
+                    Text="Nouveau Nom"
+                    BorderWidth="5"
+                    BorderColor="DarkGreen"
+                    HorizontalOptions="Fill" 
+                    Command="{Binding EntrerNouvellePersonneCommand}"/>
+    </Grid>
+</ContentPage>
